@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>팀원 입력 화면 만들기</title>
+</head>
+<body>
+    <h3>정렬하기</h3>
+    <p>팀원들의 이름을 입력받아 오름차순 또는 내림차순으로 정렬하기</p>
+    <button onclick="onClickSort('asc')">오름차순</button>
+    <button onclick="onClickSort('desc')">내림차순</button>
+    <br>
+
+    <div id="result"></div> <!-- 결과 출력되는 곳 -->
+
+    <script>
+        var teamMembers = [];
+
+        function getTeamMembers() {
+            while (true) {
+                var input = prompt("팀원 이름을 입력해 주세요. 더 이상 없으면 end를 입력하세요!");
+                if (input && input.toLowerCase() !== 'end') {
+                    teamMembers.push(input);
+                } else {
+                    showTeamMembers();
+                    break;
+                }
+            }
+        }
+
+        function showTeamMembers() {
+            var resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = teamMembers.join(", "); 
+        }
+
+        function sortMembers(order) {
+            var sortedMembers = teamMembers.slice();
+            if (order === 'asc') {
+                sortedMembers.sort();
+            } else if (order === 'desc') {
+                sortedMembers.sort().reverse();
+            }
+
+            teamMembers = sortedMembers;
+            showTeamMembers();
+        }
+
+        function onClickSort(order) {
+            sortMembers(order);
+        }
+
+        getTeamMembers();
+    </script>
+</body>
+</html>
